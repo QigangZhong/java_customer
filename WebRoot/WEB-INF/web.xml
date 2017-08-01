@@ -5,10 +5,19 @@
     <servlet-name>AddServlet</servlet-name>
     <servlet-class>com.qigang.web.AddServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ListServlet</servlet-name>
+    <servlet-class>com.qigang.web.ListServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>AddServlet</servlet-name>
     <url-pattern>/servlet/AddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ListServlet</servlet-name>
+    <url-pattern>/servlet/ListServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

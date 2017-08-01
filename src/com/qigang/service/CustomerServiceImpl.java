@@ -1,5 +1,7 @@
 package com.qigang.service;
 
+import java.util.List;
+
 import com.qigang.dao.CustomerDao;
 import com.qigang.domain.Customer;
 import com.qigang.factory.BasicFactory;
@@ -14,6 +16,11 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		
 		dao.addCust(c);
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		return dao.getAllCustomers();
 	}
 	
 }
