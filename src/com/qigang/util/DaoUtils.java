@@ -15,7 +15,7 @@ public class DaoUtils {
 		return _source;
 	}
 	
-	public Connection GetConn(){
+	public static Connection GetConn(){
 		try {
 			return _source.getConnection();
 		} catch (Exception e) {

@@ -14,4 +14,12 @@ public interface CustomerService{
 
 	List<Customer> getAllCustomers();
 
+	Customer getCustomerById(String id);
+
+	int updateCustomer(Customer cust);
+
+	int deleteCustomer(String id);
+
+	void batchDelete(String[] ids);
+
 }
