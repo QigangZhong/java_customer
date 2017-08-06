@@ -3,6 +3,7 @@ package com.qigang.service;
 import java.util.List;
 
 import com.qigang.domain.Customer;
+import com.qigang.domain.Page;
 
 public interface CustomerService{
 
@@ -21,5 +22,13 @@ public interface CustomerService{
 	int deleteCustomer(String id);
 
 	void batchDelete(String[] ids);
+
+	/**
+	 * ∑÷“≥≤È—Ø
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	Page getPagedCustomers(int pageIndex, int pageSize);
 
 }

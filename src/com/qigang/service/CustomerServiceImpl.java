@@ -1,13 +1,13 @@
 package com.qigang.service;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.DbUtils;
 
 import com.qigang.dao.CustomerDao;
 import com.qigang.domain.Customer;
+import com.qigang.domain.Page;
 import com.qigang.factory.BasicFactory;
 import com.qigang.util.DaoUtils;
 
@@ -56,9 +56,7 @@ public class CustomerServiceImpl implements CustomerService{
 			for(String id:ids){
 				dao.delCustomerWithTrans(conn,id);
 			}
-			
-			int i=1/0;
-			
+
 			//执行成功，提交事务
 			DbUtils.commitAndCloseQuietly(conn);
 		} catch (Exception e) {
@@ -67,6 +65,38 @@ public class CustomerServiceImpl implements CustomerService{
 			e.printStackTrace();
 			throw new RuntimeException();
 		}
+	}
+
+	@Override
+	public Page getPagedCustomers(int pageIndex, int pageSize) {
+		Page page=new Page();
+		//当前页码
+		page.setPageIndex(pageIndex);
+		//一页有多少行数据
+		page.setPageSize(pageSize);
+		
+		//总行数
+		int totalRowCount=dao.getTotalRowCont();
+		page.setTotalRowCount(totalRowCount);
+		
+		//总页数
+		int pageCount=totalRowCount/pageSize+(totalRowCount%pageSize==0?0:1);
+		page.setPageCount(pageCount);
+		
+		//首页
+		page.setFirstPage(1);
+		//上一页
+		page.setPrevPage(pageIndex<=1?1:(pageIndex-1));
+		//下一页
+		page.setNextPage(pageIndex>=pageCount?pageCount:(pageIndex+1));
+		//尾页
+		page.setLastPage(pageCount);
+		
+		//当前页的数据
+		List<Customer> list=dao.getPagedCustomers(pageIndex,pageSize);
+		page.setList(list);
+		
+		return page;
 	}
 	
 }

@@ -25,6 +25,11 @@
     <servlet-name>BatchDelServlet</servlet-name>
     <servlet-class>com.qigang.web.BatchDelServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>PagedListServlet</servlet-name>
+    <servlet-class>com.qigang.web.PagedListServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -54,6 +59,10 @@
   <servlet-mapping>
     <servlet-name>BatchDelServlet</servlet-name>
     <url-pattern>/servlet/BatchDelServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PagedListServlet</servlet-name>
+    <url-pattern>/servlet/PagedListServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

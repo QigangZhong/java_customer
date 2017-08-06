@@ -22,4 +22,8 @@ public interface CustomerDao {
 
 	void delCustomerWithTrans(Connection conn, String id)  throws SQLException;
 
+	int getTotalRowCont();
+
+	List<Customer> getPagedCustomers(int pageIndex, int pageSize);
+
 }

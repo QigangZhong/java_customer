@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.qigang.domain.Customer;
 import com.qigang.util.DaoUtils;
@@ -87,5 +88,29 @@ public class CustomerDaoImpl implements CustomerDao {
 	public void delCustomerWithTrans(Connection conn, String id) throws SQLException {
 		QueryRunner runner=new QueryRunner();
 		runner.update(conn, "delete from customer where id=?",id);
+	}
+
+	@Override
+	public int getTotalRowCont() {
+		
+		try {
+			QueryRunner runner=new QueryRunner(DaoUtils.GetDataSource());
+			Long count = (Long)runner.query("select count(*) from customer", new ScalarHandler());
+			return count.intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public List<Customer> getPagedCustomers(int pageIndex, int pageSize) {
+		try{
+			QueryRunner runner=new QueryRunner(DaoUtils.GetDataSource());
+			return runner.query("select * from customer limit ?,?", new BeanListHandler<Customer>(Customer.class),(pageIndex-1)*pageSize,pageSize);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
 	}
 }
